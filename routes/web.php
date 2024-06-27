@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Resume\ResumeController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -31,4 +32,5 @@ Route::middleware('auth')->group(function() {
     Route::get('/create-resume', function(){
         return view('pages.createResume');
     })->name('resume.create');
+    Route::post('/create-resume', [ResumeController::class, 'store']);
 });
