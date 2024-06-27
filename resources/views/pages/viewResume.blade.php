@@ -5,8 +5,13 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>Name: {{ $resume->first_name }} {{ $resume->last_name }}</h3>
-                <p>Email: {{ $resume->email }}</p>
-                <p>Mobile Number: {{ $resume->phone }}</p>
+                <p class="m-0">Email: <span class="fw-bold">{{ $resume->email }}</span></p>
+                <p class="m-0">Mobile Number: <span class="fw-bold">{{ $resume->phone }}</span></p>
+                <p class="m-0">
+                    <span>Address : </span>
+                <p class="fw-bold"> {{ $resume->address }}, {{ $resume->city }}, {{ $resume->state }}, {{ $resume->country }}
+                    ({{ $resume->zip_code }})</p>
+                </p>
             </div>
         </div>
         <hr />
@@ -57,9 +62,13 @@
             <div class="col-md-12">
                 <h2>Exprience</h2>
                 <ul>
-                    @foreach (json_decode($resume->experience) as $experience)
-                        <li>{{ $experience }}</li>
-                    @endforeach
+                    @if ($resume->experience)
+                        @foreach (json_decode($resume->experience) as $experience)
+                            <li>{{ $experience }}</li>
+                        @endforeach
+                    @else
+                        <li>Fresher</li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -76,12 +85,13 @@
                 </ul>
             </div>
         </div>
+        <hr />
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Projects</h2>
-                @if ($resume->projects)
+    @if ($resume->projects)
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Projects</h2>
                     @php
                         $project = json_decode($resume->projects, true);
                         $count = count($project['name']);
@@ -90,13 +100,35 @@
                         <h4 class="ms-5">{{ $project['name'][$i] }}</h4>
                         <p class="ms-5 mb-0">
                             <span class="fw-bold">Project Description : </span>
-                            <br/>
-                            <p class="ms-5">{{ $project['description'][$i] }}</p>
+                            <br />
+                        <p class="ms-5">{{ $project['description'][$i] }}</p>
                         </p>
                     @endfor
-                @endif
+                </div>
             </div>
+            <hr />
         </div>
-        <hr />
-    </div>
+    @endif
+    @if ($resume->certifications)
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Certifications</h2>
+                    @php
+                        $certification = json_decode($resume->certifications, true);
+                        $count = count($certification['name']);
+                    @endphp
+                    @for ($i = 0; $i < $count; $i++)
+                        <h4 class="ms-5">{{ $certification['name'][$i] }}</h4>
+                        <p class="ms-5 mb-0">
+                            <span class="fw-bold">Certification Description : </span>
+                            <br />
+                        <p class="ms-5">{{ $certification['description'][$i] }}</p>
+                        </p>
+                    @endfor
+                </div>
+            </div>
+            <hr />
+        </div>
+    @endif
 @endsection
