@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Resume;
 
-use App\Http\Controllers\Controller;
 use App\Models\Resume;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ResumeController extends Controller
 {
+    public function index()
+    {
+        $resume = Resume::where('user_id', Auth::user()->id)->first();
+        return view('pages.viewResume', compact('resume'));
+    }
+
     public function store(Request $request)
     {
         // Validate the incoming request data
@@ -20,7 +27,7 @@ class ResumeController extends Controller
         // dd($request->all());
         // Create a new Resume instance
         $resume = new Resume();
-        
+
         // Fill the Resume model with validated data
         $resume->fill($validatedData);
 
@@ -45,5 +52,11 @@ class ResumeController extends Controller
 
         // Redirect back with a success message or to another page
         return redirect()->route('resume.create')->with('success', 'Resume created successfully!');
+    }
+
+    public function edit($id)
+    {
+        $resume = Resume::findOrFail($id);
+        return view('pages.editResume', compact('resume'));
     }
 }

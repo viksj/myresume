@@ -33,4 +33,5 @@ Route::middleware('auth')->group(function() {
         return view('pages.createResume');
     })->name('resume.create');
     Route::post('/create-resume', [ResumeController::class, 'store']);
+    Route::get('/view-resume', [ResumeController::class, 'index'])->name('resume.view');
 });

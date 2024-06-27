@@ -28,6 +28,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{route('resume.create')}}">{{__('Create Resume')}}</a></li>
+                                    <li><a class="dropdown-item" href="{{route('resume.view')}}">{{__('View Resume')}}</a></li>
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
