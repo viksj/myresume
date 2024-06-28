@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Resume\PDFController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Resume\ResumeController;
 
 // Route::get('/', function () {
@@ -34,4 +35,6 @@ Route::middleware('auth')->group(function() {
     })->name('resume.create');
     Route::post('/create-resume', [ResumeController::class, 'store']);
     Route::get('/view-resume', [ResumeController::class, 'index'])->name('resume.view');
+    Route::get('resumes/{resume}/pdf', [PDFController::class, 'generatePDF'])->name('resumes.pdf');
+
 });

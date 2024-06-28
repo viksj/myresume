@@ -1,10 +1,10 @@
 @extends('layout.main')
 @section('title', 'Create Resume')
 @section('main-content')
-    <div class="container">
+    <div class="container border">
         <div class="row">
             <div class="col-md-12">
-                <h3>Name: {{ $resume->first_name }} {{ $resume->last_name }}</h3>
+                <h4>{{ $resume->first_name }} {{ $resume->last_name }}</h4>
                 <p class="m-0">Email: <span class="fw-bold">{{ $resume->email }}</span></p>
                 <p class="m-0">Mobile Number: <span class="fw-bold">{{ $resume->phone }}</span></p>
                 <p class="m-0">
@@ -15,20 +15,16 @@
             </div>
         </div>
         <hr />
-    </div>
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Profile Summary</h2>
+                <h5 style="background-color: #82a3e9; color: #ffffff; padding: 5px;">Profile Summary</h5>
                 <p>{{ $resume->summary }}</p>
             </div>
         </div>
         <hr />
-    </div>
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Education</h2>
+                <h5 style="background-color: #82a3e9; color: #ffffff; padding: 5px;">Education</h5>
                 <table class="table">
                     <thead>
                         <tr>
@@ -56,11 +52,9 @@
             </div>
         </div>
         <hr />
-    </div>
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Exprience</h2>
+                <h5 style="background-color: #82a3e9; color: #ffffff; padding: 5px;">Exprience</h5>
                 <ul>
                     @if ($resume->experience)
                         @foreach (json_decode($resume->experience) as $experience)
@@ -73,11 +67,9 @@
             </div>
         </div>
         <hr />
-    </div>
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Skills</h2>
+                <h5 style="background-color: #82a3e9; color: #ffffff; padding: 5px;">Skills</h5>
                 <ul>
                     @foreach (json_decode($resume->skills) as $skill)
                         <li>{{ $skill }}</li>
@@ -86,12 +78,10 @@
             </div>
         </div>
         <hr />
-    </div>
-    @if ($resume->projects)
-        <div class="container">
+        @if ($resume->projects)
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Projects</h2>
+                    <h5 style="background-color: #82a3e9; color: #ffffff; padding: 5px;">Projects</h5>
                     @php
                         $project = json_decode($resume->projects, true);
                         $count = count($project['name']);
@@ -107,13 +97,11 @@
                 </div>
             </div>
             <hr />
-        </div>
-    @endif
-    @if ($resume->certifications)
-        <div class="container">
+        @endif
+        @if ($resume->certifications)
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Certifications</h2>
+                    <h5 style="background-color: #82a3e9; color: #ffffff; padding: 5px;">Certifications</h5>
                     @php
                         $certification = json_decode($resume->certifications, true);
                         $count = count($certification['name']);
@@ -129,6 +117,6 @@
                 </div>
             </div>
             <hr />
-        </div>
-    @endif
+        @endif
+    </div>
 @endsection
